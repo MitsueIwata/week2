@@ -62,7 +62,8 @@ class IMDB
 
   def self.find_by(criteria)
     all.detect do |m|
-      criteria.all? { |k,v| m[k.to_sym].to_s == v.to_s }
+      criteria.all? { |k,v| m[k.to_sym].to_s.downcase == v.to_s.downcase ||
+                            m[k.to_sym].to_s.downcase =~ /#{v.to_s.downcase}/ }
     end
   end
 
